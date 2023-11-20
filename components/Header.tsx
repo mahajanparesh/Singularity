@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import openseaLogo from "../assets/opensea.png";
+import singularity from "../assets/singularity.svg";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
@@ -11,11 +11,11 @@ const style = {
   logoContainer: `flex items-center cursor-pointer`,
   logoText: ` ml-[0.8rem] text-white font-semibold text-2xl`,
   searchBar: `flex flex-1 mx-[0.8rem] w-max-[520px] items-center bg-[#363840] rounded-[0.8rem] hover:bg-[#4c505c]`,
-  searchIcon: `text-common-gray mx-3 font-bold text-lg`,
+  searchIcon: `text-gray-400 mx-3 font-bold text-lg`,
   searchInput: `h-[2.6rem] w-full border-0 bg-transparent outline-0 ring-0 px-2 pl-0 text-[#e6e8eb] placeholder:text-common-gray`,
   headerItems: ` flex items-center justify-end`,
   headerItem: `text-white px-4 font-bold text-[#c8cacd] hover:text-white cursor-pointer`,
-  headerIcon: `text-common-gray text-3xl font-black px-4 hover:text-white cursor-pointer`,
+  headerIcon: `text-gray-400 text-3xl font-black px-4 hover:text-white cursor-pointer`,
 };
 
 const Header = () => {
@@ -23,8 +23,8 @@ const Header = () => {
     <div className={style.wrapper}>
       <Link href="/">
         <div className={style.logoContainer}>
-          <Image src={openseaLogo} height={40} width={40} alt="OpenSeaLogo" />
-          <div className={style.logoText}>Opensea</div>
+          <Image src={singularity} height={40} width={40} alt="OpenSeaLogo" />
+          <div className={style.logoText}>Singularity</div>
         </div>
       </Link>
       <div className={style.searchBar}>
@@ -53,5 +53,4 @@ const Header = () => {
     </div>
   );
 };
-
 export default Header;
