@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sanity/client": "^6.8.5",
+    "@3rdweb/hooks": "^1.9.2",
+    "@sanity/client": "^6.8.6",
     "@thirdweb-dev/react": "^4.1.7",
     "@thirdweb-dev/sdk": "^4.0.14",
     "ethers": "^5.7.2",

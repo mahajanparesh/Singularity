@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'singularity',
 
-  projectId: '1ghobyia',
+  projectId: '0ivb2b7o',
   dataset: 'production',
 
   plugins: [deskTool(), visionTool()],
