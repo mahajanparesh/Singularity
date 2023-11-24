@@ -17,7 +17,7 @@ const style = {
 };
 export default function Home() {
   const { address, connectWallet } = useWeb3();
-  const welcomeUser = (userName, toastHandler = toast) => {
+  const welcomeUser = (userName: any, toastHandler = toast) => {
     toastHandler.success(
       `Welcome back${userName !== "Unnamed" ? ` ${userName}` : ""}!`,
       {
