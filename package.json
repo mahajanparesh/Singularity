@@ -12,6 +12,8 @@
     "@3rdweb/hooks": "^1.9.2",
     "@3rdweb/sdk": "^1.42.1",
     "@sanity/client": "^6.8.6",
+    "@thirdweb-dev/react": "^4.1.10",
+    "@thirdweb-dev/sdk": "^4.0.17",
     "ethers": "^5.7.2",
     "next": "14.0.2",
     "react": "^18",

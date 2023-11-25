@@ -1,23 +1,22 @@
-import '../styles/globals.css';
-import { ThirdwebWeb3Provider, ThirdwebWeb3ProviderProps } from '@3rdweb/hooks';
+import "../styles/globals.css";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { Sepolia } from "@thirdweb-dev/chains";
 
 /**
  * The chain ID 4 represents the Rinkeby network
  * The `injected` connector is a web3 connection method used by Metamask
  */
-const supportedChainId = [4];
-const connectors = {
-  injected: {},
-};
 
-function MyApp({ Component, pageProps }){
+const activeChain = Sepolia;
+
+function MyApp({ Component, pageProps }) {
   return (
-    <ThirdwebWeb3Provider
-      supportedChainIds={[11155111]}
-      connectors={connectors}
+    <ThirdwebProvider
+      activeChain={activeChain}
+      clientId="7a64d2a50312828c197a30a6db731012"
     >
       <Component {...pageProps} />
-    </ThirdwebWeb3Provider>
+    </ThirdwebProvider>
   );
 }
 

@@ -13,7 +13,7 @@ const style = {
   searchBar: `flex flex-1 mx-[0.8rem] w-max-[520px] items-center bg-[#363840] rounded-[0.8rem] hover:bg-[#4c505c]`,
   searchIcon: `text-gray-400 mx-3 font-bold text-lg`,
   searchInput: `h-[2.6rem] w-full border-0 bg-transparent outline-0 ring-0 px-2 pl-0 text-[#e6e8eb] placeholder:text-common-gray`,
-  headerItems: ` flex items-center justify-end`,
+  headerItems: `flex items-center justify-end`,
   headerItem: `text-white px-4 font-bold text-[#c8cacd] hover:text-white cursor-pointer`,
   headerIcon: `text-gray-400 text-3xl font-black px-4 hover:text-white cursor-pointer`,
 };
@@ -37,7 +37,7 @@ const Header = () => {
         />
       </div>
       <div className={style.headerItems}>
-        <Link href="/collections/0x69A2B6DFa6F84B250d21F861fbC88fD9E99a034C">
+        <Link href="/collections/0x6023eB972a96fC7eA317745B068189a4b8f00210">
           <div className={style.headerItem}> Collections </div>
         </Link>
         <div className={style.headerItem}> Stats </div>

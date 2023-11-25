@@ -3,8 +3,8 @@ import { BiHeart } from "react-icons/bi";
 import Router from "next/router";
 
 const style = {
-  wrapper: `bg-[#303339] flex-auto w-[14rem] h-[22rem] my-10 mx-5 rounded-2xl overflow-hidden cursor-pointer`,
-  imgContainer: `h-2/3 w-full overflow-hidden flex justify-center items-center`,
+  wrapper: `bg-[#303339] w-full my-10 rounded-2xl overflow-hidden cursor-pointer`,
+  imgContainer: `w-full flex justify-center items-center`,
   nftImg: `w-full object-cover`,
   details: `p-3`,
   info: `flex justify-between text-[#e4e8eb] drop-shadow-xl`,
@@ -35,10 +35,9 @@ const NFTCard = ({
     const listing = listings.find((listing: any) => listing.asset.id === nftItem.id);
     if (Boolean(listing)) {
       setIsListed(true);
-      setPrice(listing.buyoutCurrencyValuePerToken.displayValue);
+      setPrice(listing?.currencyValuePerToken?.displayValue);
     }
   }, [listings, nftItem]);
-
 
 //   console.log(isListed)
 
@@ -47,19 +46,19 @@ const NFTCard = ({
       className={style.wrapper}
       onClick={() => {
         Router.push({
-          pathname: `/nfts/${nftItem.id}`,
+          pathname: `/nfts/${nftItem?.asset?.id}`,
           query: { isListed: isListed },
         });
       }}
     >
       <div className={style.imgContainer}>
-        <img src={nftItem.image} alt={nftItem.name} className={style.nftImg} />
+        <img src={nftItem?.asset?.image} alt={nftItem?.asset?.name} className={style.nftImg} />
       </div>
       <div className={style.details}>
         <div className={style.info}>
           <div className={style.infoLeft}>
             <div className={style.collectionName}>{title}</div>
-            <div className={style.assetName}>{nftItem.name}</div>
+            <div className={style.assetName}>{nftItem?.asset?.name}</div>
           </div>
           {isListed && (
             <div className={style.infoRight}>

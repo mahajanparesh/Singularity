@@ -1,19 +1,20 @@
-import React, { useEffect, useState, useMemo } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import { useWeb3 } from '@3rdweb/hooks'
-import { client } from '../../lib/sanityClient'
-import { ThirdwebSDK } from '@3rdweb/sdk'
-import Header from '../../components/Header'
-import { CgWebsite } from 'react-icons/cg'
-import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai'
-import { HiDotsVertical } from 'react-icons/hi'
-import NFTCard from '../../components/NFTCard'
+import React, { useEffect, useState, useMemo } from "react";
+import { useRouter } from "next/router";
+import { client } from "../../lib/sanityClient";
+import Header from "../../components/Header";
+import { CgWebsite } from "react-icons/cg";
+import { AiOutlineInstagram, AiOutlineTwitter } from "react-icons/ai";
+import { HiDotsVertical } from "react-icons/hi";
+import NFTCard from "../../components/NFTCard";
+import {
+  useContract,
+  useDirectListings,
+} from "@thirdweb-dev/react";
 
 const style = {
-  bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
+  bannerImageContainer: `h-[20vh] w-fit overflow-hidden flex justify-center items-center`,
   bannerImage: `w-full object-cover`,
-  infoContainer: `w-screen px-4`,
+  infoContainer: `w-full px-4`,
   midRow: `w-full flex justify-center text-white`,
   endRow: `w-full flex justify-end text-white`,
   profileImg: `w-40 h-40 object-cover rounded-full border-2 border-[#202225] mt-[-4rem]`,
@@ -30,58 +31,13 @@ const style = {
   ethLogo: `h-6 mr-2`,
   statName: `text-lg w-full text-center mt-1`,
   description: `text-[#8a939b] text-xl w-max-1/4 flex-wrap mt-4`,
-}
+};
 
 const Collection = () => {
   const router = useRouter();
-  const { provider } = useWeb3();
+  // const { provider } = useWeb3();
   const { collectionId } = router.query;
   const [collection, setCollection] = useState({});
-  const [nfts, setNfts] = useState([]);
-  const [listings, setListings] = useState([]);
-  
-  // useMemo similar to useEffect but also supports caching
-  const nftModule = useMemo(() => {
-    if (!provider) return
-
-    const sdk = new ThirdwebSDK(
-      provider.getSigner(),
-      'https://eth-sepolia.g.alchemy.com/v2/Koo5oeovs12xHVTwnltnSM-VXyrKgdaA'
-    )
-    return sdk.getNFTModule(collectionId)
-  }, [provider])
-
-  // get all NFTs in the collection
-  useEffect(() => {
-    if (!nftModule) return;
-    (async () => {
-      const nfts = await nftModule.getAll()
-
-      setNfts(nfts);
-    })()
-  }, [nftModule]);
-
-  const marketPlaceModule = useMemo(() => {
-    if (!provider) return
-    ;const sdk = new ThirdwebSDK(
-      provider.getSigner(),
-      'https://eth-sepolia.g.alchemy.com/v2/Koo5oeovs12xHVTwnltnSM-VXyrKgdaA'
-    )
-    return sdk.getMarketplaceModule(
-      '0x116E4011332223F42C589095a2E6bc5CFaf0B76E'
-    )
-  }, [provider])
-
-  // console.log(marketPlaceModule.getAllListings())
-
-  // get all listings in the collection
-  useEffect(() => {
-    if (!marketPlaceModule) return;
-    
-    (async () => {
-      setListings(await marketPlaceModule.getAllListings())
-    })()
-  }, [marketPlaceModule])
 
   const fetchCollectionData = async (sanityClient = client) => {
     const query = `*[_type == "marketItems" && contractAddress == "${collectionId}" ] {
@@ -108,13 +64,22 @@ const Collection = () => {
     fetchCollectionData()
   }, [collectionId])
 
-  console.log(router.query)
-  console.log(router.query.collectionId)
+  // console.log(router.query);
+  console.log('susssssssssssssssssssssssssss', router.query.collectionId);
 
-  // console.log("mylisting", listings)
+  const { contract } = useContract(
+    "0x7603Cdeb4101bDD5b6f4C152c1EffF61bcB5bfD3",
+    "marketplace-v3"
+  );
+
+  const { data: nfts, isLoading } = useDirectListings(contract);
+
+  // console.log(nfts);
+
+  // console.log(collection)
 
   return (
-    <div className="overflow-hidden">
+    <div>
       <Header />
       <div className={style.bannerImageContainer}>
         <img
@@ -122,7 +87,7 @@ const Collection = () => {
           src={
             collection?.bannerImageUrl
               ? collection.bannerImageUrl
-              : 'https://via.placeholder.com/200'
+              : "https://via.placeholder.com/200"
           }
           alt="banner"
         />
@@ -134,7 +99,7 @@ const Collection = () => {
             src={
               collection?.imageUrl
                 ? collection.imageUrl
-                : 'https://via.placeholder.com/200'
+                : "https://via.placeholder.com/200"
             }
             alt="profile image"
           />
@@ -167,19 +132,19 @@ const Collection = () => {
         </div>
         <div className={style.midRow}>
           <div className={style.createdBy}>
-            Created by{' '}
+            Created by{" "}
             <span className="text-[#2081e2]">{collection?.creator}</span>
           </div>
         </div>
         <div className={style.midRow}>
           <div className={style.statsContainer}>
             <div className={style.collectionStat}>
-              <div className={style.statValue}>{nfts.length}</div>
+              <div className={style.statValue}>{nfts?.length}</div>
               <div className={style.statName}>items</div>
             </div>
             <div className={style.collectionStat}>
               <div className={style.statValue}>
-                {collection?.allOwners ? collection.allOwners.length : ''}
+                {collection?.allOwners ? collection.allOwners.length : ""}
               </div>
               <div className={style.statName}>owners</div>
             </div>
@@ -211,18 +176,24 @@ const Collection = () => {
           <div className={style.description}>{collection?.description}</div>
         </div>
       </div>
-      <div className="flex flex-wrap ">
-        {nfts.map((nftItem, id) => (
-          <NFTCard
-            key={id}
-            nftItem={nftItem}
-            title={collection?.title}
-            listings={listings}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
 
-export default Collection
+      {!isLoading ? (
+        <div className="grid grid-cols-12 gap-5 px-5">
+          {nfts.map((nftItem, id) => (
+            <div key={id} className="lg:col-span-2 md:col-span-3 sm:col-span-4">
+              <NFTCard
+                nftItem={nftItem}
+                title={collection?.title}
+                listings={nfts}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>Loading....</div>
+      )}
+    </div>
+  );
+};
+
+export default Collection;
