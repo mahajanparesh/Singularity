@@ -6,8 +6,13 @@ import { CgWebsite } from "react-icons/cg";
 import { AiOutlineInstagram, AiOutlineTwitter } from "react-icons/ai";
 import { HiDotsVertical } from "react-icons/hi";
 import NFTCard from "../../components/NFTCard";
-import { useContract, useDirectListings } from "@thirdweb-dev/react";
+import {
+  useContract,
+  useDirectListings,
+  useActiveListings,
+} from "@thirdweb-dev/react";
 import CircularProgress from "@mui/material/CircularProgress";
+import { data } from "autoprefixer";
 
 const style = {
   bannerImageContainer: `h-[20vh] w-fit overflow-hidden flex justify-center items-center`,
@@ -70,6 +75,8 @@ const Collection = () => {
   );
 
   const { data: nfts, isLoading } = useDirectListings(contract);
+
+  console.log(nfts, "🔥🔥🔥🔥🔥🔥🔥🔥");
 
   // console.log(nfts);
 
@@ -178,7 +185,10 @@ const Collection = () => {
       {!isLoading ? (
         <div className="grid grid-cols-12 gap-5 px-5 my-11">
           {nfts.map((nftItem, id) => (
-            <div key={id} className="lg:col-span-2 md:col-span-3 sm:col-span-4 col-span-12">
+            <div
+              key={id}
+              className="lg:col-span-2 md:col-span-3 sm:col-span-4 col-span-12"
+            >
               <NFTCard
                 nftItem={nftItem}
                 title={collection?.title}
