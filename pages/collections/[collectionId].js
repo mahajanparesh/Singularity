@@ -21,7 +21,7 @@ const style = {
   socialIconsContent: `flex container justify-between text-[1.4rem] border-2 rounded-lg px-2`,
   socialIcon: `my-2`,
   divider: `border-r-2`,
-  title: `text-5xl font-bold mb-4`,
+  title: `md:text-5xl sm:text-3xl text-2xl font-bold mb-4`,
   createdBy: `text-lg mb-4`,
   statsContainer: `sm:w-[100%] md:w-[80%] lg:w-[60%] flex gap-5 justify-evenly p-4 border border-[#151b22] rounded-xl mb-4`,
   collectionStat: `w-fit`,
@@ -176,9 +176,9 @@ const Collection = () => {
       </div>
 
       {!isLoading ? (
-        <div className="grid grid-cols-12 gap-5 px-5">
+        <div className="grid grid-cols-12 gap-5 px-5 my-11">
           {nfts.map((nftItem, id) => (
-            <div key={id} className="lg:col-span-2 md:col-span-3 sm:col-span-4">
+            <div key={id} className="lg:col-span-2 md:col-span-3 sm:col-span-4 col-span-12">
               <NFTCard
                 nftItem={nftItem}
                 title={collection?.title}
