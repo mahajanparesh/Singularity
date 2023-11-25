@@ -192,7 +192,7 @@ const Collection = () => {
               <NFTCard
                 nftItem={nftItem}
                 title={collection?.title}
-                listings={nfts}
+                listings={nftItem}
               />
             </div>
           ))}
