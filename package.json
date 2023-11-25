@@ -11,6 +11,9 @@
   "dependencies": {
     "@3rdweb/hooks": "^1.9.2",
     "@3rdweb/sdk": "^1.42.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.18",
     "@sanity/client": "^6.8.6",
     "@thirdweb-dev/react": "^4.1.10",
     "@thirdweb-dev/sdk": "^4.0.17",
