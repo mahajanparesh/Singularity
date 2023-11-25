@@ -6,6 +6,7 @@ import Hero from "@/components/Hero";
 import { useEffect } from "react";
 import { client } from "../lib/sanityClient";
 import toast, { Toaster } from "react-hot-toast";
+import {useAddress, useConnect, metamaskWallet } from "@thirdweb-dev/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +16,15 @@ const style = {
   button: `border border-[#282b2f] bg-[#2081e2] p-[0.8rem] text-xl font-semibold rounded-lg cursor-pointer text-black`,
   details: `text-lg text-center text=[#282b2f] font-semibold mt-4`,
 };
+
+const metamaskConfig = metamaskWallet();
+
 export default function Home() {
-  const { address, connectWallet } = useWeb3();
+
+  const address = useAddress();
+  const connect = useConnect();
+
+  // const { address, connectWallet } = useWeb3();
   const welcomeUser = (userName: any, toastHandler = toast) => {
     toastHandler.success(
       `Welcome back${userName !== "Unnamed" ? ` ${userName}` : ""}!`,
@@ -55,7 +63,10 @@ export default function Home() {
         <div className={style.walletConnectWrapper}>
           <button
             className={style.button}
-            onClick={() => connectWallet("injected")}
+            onClick={async () => {
+              const wallet = await connect(metamaskConfig);
+              console.log("connected to ", wallet);
+            }}
           >
             Connect Wallet
           </button>
