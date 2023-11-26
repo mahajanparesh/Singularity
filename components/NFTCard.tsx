@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { BiHeart } from "react-icons/bi";
 import Router from "next/router";
@@ -28,8 +29,8 @@ const NFTCard = ({
   title: any;
   listings: any;
 }) => {
-  const [isListed, setIsListed] = useState(false);
-  const [price, setPrice] = useState(0);
+  const [isListed, setIsListed] = useState<boolean>(false);
+  const [price, setPrice] = useState<number>(0);
 
   useEffect(() => {
     if (listings.status === 4) {
@@ -37,14 +38,13 @@ const NFTCard = ({
       setPrice(listings?.currencyValuePerToken?.displayValue);
     }
   }, [listings, nftItem]);
-  //   console.log(isListed)
 
   return (
     <div
       className={style.wrapper}
       onClick={() => {
         Router.push({
-          pathname: `/nfts/${nftItem?.asset?.id}`,
+          pathname: `../nfts/${nftItem?.asset?.id}`,
           query: { isListed: isListed },
         });
       }}
@@ -79,7 +79,7 @@ const NFTCard = ({
         <div className={style.likes}>
           <span className={style.likeIcon}>
             <BiHeart />
-          </span>{" "}
+          </span>
           {nftItem.likes}
         </div>
       </div>

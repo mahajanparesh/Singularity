@@ -39,7 +39,7 @@ const style = {
 const Collection = () => {
   const router = useRouter();
   const { collectionId } = router.query;
-  const [collection, setCollection] = useState({});
+  const [collection, setCollection] = useState<any>({});
 
   const fetchCollectionData = async (sanityClient = client) => {
     const query = `*[_type == "marketItems" && contractAddress == "${collectionId}" ] {
@@ -184,7 +184,7 @@ const Collection = () => {
 
       {!isLoading ? (
         <div className="grid grid-cols-12 gap-5 px-5 my-11">
-          {nfts.map((nftItem, id) => (
+          {nfts && nfts.map((nftItem, id) => (
             <div
               key={id}
               className="lg:col-span-2 md:col-span-3 sm:col-span-4 col-span-12"

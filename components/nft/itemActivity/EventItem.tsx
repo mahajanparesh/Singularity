@@ -1,3 +1,4 @@
+import React from "react";
 import { BsFillCartFill } from "react-icons/bs";
 
 const style = {
@@ -11,7 +12,7 @@ const style = {
   accent: `text-[#2081e2]`,
 };
 
-const EventItem = ({ event }) => {
+const EventItem = ({ event }: {event: any}) => {
   return (
     <div className={style.eventItem}>
       <div className={`${style.event} flex-[2]`}>

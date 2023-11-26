@@ -1,3 +1,4 @@
+import React from "react";
 import { IoMdSnow } from "react-icons/io";
 import { AiOutlineHeart } from "react-icons/ai";
 
@@ -7,7 +8,7 @@ const style = {
   likesCounter: `flex-1 flex items-center justify-end`,
 };
 
-const NFTImage = ({ selectedNft }) => {
+const NFTImage = ({ selectedNft }: { selectedNft: any }) => {
   return (
     <div>
       <div className={style.topBar}>
@@ -20,7 +21,6 @@ const NFTImage = ({ selectedNft }) => {
         </div>
       </div>
       <div>
-        {}
         <img src={selectedNft.asset.image} />
       </div>
     </div>

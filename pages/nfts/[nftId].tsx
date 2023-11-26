@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "../../components/Header";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
@@ -10,6 +11,7 @@ import NFTImage from "../../components/nft/NFTImage";
 import GeneralDetails from "../../components/nft/GeneralDetails";
 import ItemActivity from "../../components/nft/ItemActivity";
 import CircularProgress from "@mui/material/CircularProgress"; // Import CircularProgress from Material-UI
+import MakeOffer from "../../components/nft/Purchase";
 
 const style = {
   wrapper: `flex flex-col items-center container-lg text-[#e5e8eb]`,
@@ -22,13 +24,17 @@ const style = {
 const Nft = () => {
   const router = useRouter();
 
+  const { isListed } = router.query;
+
   const { contract } = useContract(
     "0x7603Cdeb4101bDD5b6f4C152c1EffF61bcB5bfD3",
     "marketplace-v3"
   );
 
   const { data: nfts, isLoading } = useDirectListings(contract);
-  const selectedNftItem = nfts?.find((nft) => nft.id === router.query.nftId);
+
+  const selectedNftItem =
+    nfts && nfts?.find((nft) => nft.id === router.query.nftId);
 
   if (isLoading) {
     return (
@@ -54,6 +60,13 @@ const Nft = () => {
             </div>
             <div className={style.detailsContainer}>
               <GeneralDetails selectedNft={selectedNftItem} />
+
+              <MakeOffer
+                isListed={isListed}
+                selectedNft={selectedNftItem}
+                listings={nfts}
+                marketPlaceModule={contract}
+              />
             </div>
           </div>
           <ItemActivity />
