@@ -1,8 +1,9 @@
+import React from "react";
 import { CgArrowsExchangeV } from "react-icons/cg";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { useState } from "react";
 import { dummyEvents } from "../../static/dummyEvents";
-import EventItem from "./itemActivity/eventItem";
+import EventItem from "./itemActivity/EventItem";
 
 const style = {
   wrapper: `w-full mt-8 border border-[#151b22] rounded-xl bg-[#303339] overflow-hidden`,
@@ -34,20 +35,20 @@ const ItemActivity = () => {
         </div>
       </div>
       {toggle && (
-        <div className={style.activityTable}>
+        <div>
           <div className={style.filter}>
             <div className={style.filterTitle}>Filter</div>
-            <div className={style.filterIcon}>
+            <div>
               {" "}
               <AiOutlineDown />{" "}
             </div>
           </div>
           <div className={style.tableHeader}>
-            <div className={`${style.tableHeaderElement} flex-[2]`}>Event</div>
-            <div className={`${style.tableHeaderElement} flex-[2]`}>Price</div>
-            <div className={`${style.tableHeaderElement} flex-[3]`}>From</div>
-            <div className={`${style.tableHeaderElement} flex-[3]`}>To</div>
-            <div className={`${style.tableHeaderElement} flex-[2]`}>Date</div>
+            <div className={`flex-[2]`}>Event</div>
+            <div className={`flex-[2]`}>Price</div>
+            <div className={`flex-[3]`}>From</div>
+            <div className={`flex-[3]`}>To</div>
+            <div className={`flex-[2]`}>Date</div>
           </div>
           {dummyEvents.map((event, id) => (
             <EventItem key={id} event={event} />

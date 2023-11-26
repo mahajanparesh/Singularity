@@ -1,3 +1,4 @@
+import React from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { MdRefresh } from "react-icons/md";
 import { RiShareBoxLine } from "react-icons/ri";
@@ -19,7 +20,7 @@ const style = {
   divider: `border-r-2`,
 };
 
-const GeneralDetails = ({ selectedNft }) => {
+const GeneralDetails = ({ selectedNft }: { selectedNft: any }) => {
   return (
     <div className={style.wrapper}>
       <div className={style.infoContainer}>
